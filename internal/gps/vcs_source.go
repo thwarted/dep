@@ -217,6 +217,9 @@ func (s *gitSource) listVersions(ctx context.Context) (vlist []PairedVersion, er
 	uniq := 0
 	vlist = make([]PairedVersion, len(all))
 	for _, pair := range all {
+		if len(pair) >= 1 && pair[0] == '#' {
+			continue
+		}
 		var v PairedVersion
 		if string(pair[41:]) == "HEAD" {
 			// If HEAD is present, it's always first
